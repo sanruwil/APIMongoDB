@@ -27,6 +27,15 @@ db = client["parranderos"]
 def inicio():
     return {"estado": "API funcionando correctamente"}
 
+# GET - retornar todos los bares
+@app.get('/bares')
+def get_bares():
+    bares = list(db["bares"].find(
+        {},
+        {"_id": 0}
+    ))
+    return bares
+    
 @app.get('/bares/{bar_id}/comentarios')
 def get_comentarios(bar_id: int):
     comentarios = list(db["comentarios"].find(
